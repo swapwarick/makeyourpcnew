@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import Parallax from "./Parallax";
-import { Zap, Clock, Tool, Shield } from "lucide-react";
+import { Zap, Clock, Wrench, Shield } from "lucide-react";
 
 const Features = () => {
   return (
@@ -63,7 +63,7 @@ const Features = () => {
               className="flex items-start gap-4"
             >
               <div className="p-3 bg-primary rounded-lg text-white">
-                <Tool className="w-6 h-6" />
+                <Wrench className="w-6 h-6" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold mb-2">Expert Technicians</h3>
