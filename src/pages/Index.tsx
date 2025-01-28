@@ -4,6 +4,7 @@ import Performance from "@/components/Performance";
 import Features from "@/components/Features";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
+import HardwareUpgrades from "@/components/HardwareUpgrades";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -35,6 +36,7 @@ const Index = () => {
     <main className="bg-background min-h-screen">
       <Hero />
       <Features />
+      <HardwareUpgrades />
       <Services />
       <Performance />
       <Testimonials />
