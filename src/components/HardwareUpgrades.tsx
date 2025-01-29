@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, HardDrive, Chip, Fan } from "lucide-react";
+import { Cpu, HardDrive, Fan } from "lucide-react";
 import Parallax from "./Parallax";
 
 const upgrades = [
@@ -16,7 +16,7 @@ const upgrades = [
     benefits: ["Quick boot times", "Instant app loading", "Faster file transfers"]
   },
   {
-    icon: <Chip className="w-12 h-12" />,
+    icon: <Cpu className="w-12 h-12" />,
     title: "RAM Upgrades",
     description: "Enhance multitasking with additional memory capacity.",
     benefits: ["Smooth multitasking", "Better app performance", "No more freezing"]
