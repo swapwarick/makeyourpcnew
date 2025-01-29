@@ -3,17 +3,17 @@ import { User } from "lucide-react";
 
 const testimonials = [
   {
-    name: "John Smith",
+    name: "Rajat Shukla",
     role: "Software Developer",
     content: "My 5-year-old laptop now runs like new! Incredible service.",
   },
   {
-    name: "Sarah Johnson",
+    name: "Adarsh Hegde",
     role: "Graphic Designer",
     content: "The performance boost after the upgrades is remarkable. Worth every penny!",
   },
   {
-    name: "Mike Brown",
+    name: "Mamta Tiwari",
     role: "Business Owner",
     content: "Saved me from buying a new PC. The team really knows their stuff.",
   },
