@@ -35,13 +35,13 @@ const Contact = () => {
               </p>
               <div className="space-y-4">
                 <p className="flex items-center">
-                  <span className="mr-2">📍</span> 123 Tech Street, PC City
+                  <span className="mr-2">📍</span> Mumbai, Maharashtra
                 </p>
                 <p className="flex items-center">
-                  <span className="mr-2">📞</span> (555) 123-4567
+                  <span className="mr-2">📞</span> 9821734582
                 </p>
                 <p className="flex items-center">
-                  <span className="mr-2">✉️</span> help@makeyourpcfast.com
+                  <span className="mr-2">✉️</span> makeyourpcnew@gmail.com
                 </p>
               </div>
             </div>
