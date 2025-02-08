@@ -1,4 +1,6 @@
+
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -67,6 +69,17 @@ const Hero = () => {
             >
               Learn More
             </motion.a>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                to="/blog"
+                className="inline-block bg-primary/20 text-primary px-8 py-4 rounded-lg text-lg font-medium hover:bg-primary/30 transition-colors duration-300"
+              >
+                Read Our Blog
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
