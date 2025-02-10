@@ -18,9 +18,15 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { data: { url } } = await supabase.functions.invoke('send-email', {
+      const { data, error } = await supabase.functions.invoke('send-email', {
         body: formData,
       });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      console.log('Email function response:', data);
 
       toast({
         title: "Message Sent",
@@ -28,9 +34,10 @@ const Contact = () => {
       });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
+      console.error('Error sending message:', error);
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again later.",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again later.",
         variant: "destructive",
       });
     } finally {
