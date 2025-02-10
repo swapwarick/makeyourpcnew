@@ -131,7 +131,6 @@ const Contact = () => {
           </div>
         </motion.div>
       </div>
-       <link herf="https://swapwarick.heyboss.tech/cc18cca5/#invoice-form"> Use our free Bill or Invoice Generator for Free //no ads</link>
     </section>
   );
 };
