@@ -8,48 +8,53 @@ interface EmailPayload {
 }
 
 async function getAccessToken() {
-  const SENDPULSE_USER_ID = Deno.env.get('SENDPULSE_USER_ID');
-  const SENDPULSE_SECRET = Deno.env.get('SENDPULSE_SECRET');
+  try {
+    const SENDPULSE_USER_ID = Deno.env.get('SENDPULSE_USER_ID');
+    const SENDPULSE_SECRET = Deno.env.get('SENDPULSE_SECRET');
 
-  if (!SENDPULSE_USER_ID || !SENDPULSE_SECRET) {
-    throw new Error('SendPulse credentials are not configured');
+    if (!SENDPULSE_USER_ID || !SENDPULSE_SECRET) {
+      throw new Error('SendPulse credentials are not configured. Please check your environment variables.');
+    }
+
+    const response = await fetch('https://api.sendpulse.com/oauth/access_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        grant_type: 'client_credentials',
+        client_id: SENDPULSE_USER_ID,
+        client_secret: SENDPULSE_SECRET,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('SendPulse token request failed:', errorText);
+      throw new Error(`Failed to get SendPulse access token: ${response.status} ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    if (!data.access_token) {
+      console.error('Invalid SendPulse response:', data);
+      throw new Error('SendPulse did not provide an access token');
+    }
+
+    return data.access_token;
+  } catch (error) {
+    console.error('Error getting SendPulse access token:', error);
+    throw new Error('Failed to authenticate with SendPulse');
   }
-
-  const tokenResponse = await fetch('https://api.sendpulse.com/oauth/access_token', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      grant_type: 'client_credentials',
-      client_id: SENDPULSE_USER_ID,
-      client_secret: SENDPULSE_SECRET,
-    }),
-  });
-
-  if (!tokenResponse.ok) {
-    const errorData = await tokenResponse.text();
-    console.error('Token request failed:', errorData);
-    throw new Error(`Failed to get access token: ${errorData}`);
-  }
-
-  const tokenData = await tokenResponse.json();
-  if (!tokenData.access_token) {
-    throw new Error('Invalid token response from SendPulse');
-  }
-
-  return tokenData.access_token;
 }
 
 async function sendEmail(payload: EmailPayload) {
-  console.log('Starting email send process...');
-  console.log('Payload received:', payload);
-
   try {
+    console.log('Starting email send process...');
+    
     const accessToken = await getAccessToken();
-    console.log('Access token received successfully');
+    console.log('Successfully obtained SendPulse access token');
 
-    const emailResponse = await fetch('https://api.sendpulse.com/smtp/emails', {
+    const response = await fetch('https://api.sendpulse.com/smtp/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,15 +84,15 @@ async function sendEmail(payload: EmailPayload) {
       }),
     });
 
-    if (!emailResponse.ok) {
-      const errorData = await emailResponse.text();
-      console.error('Email send failed:', errorData);
-      throw new Error(`Failed to send email: ${errorData}`);
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('SendPulse email send failed:', errorText);
+      throw new Error(`Failed to send email: ${response.status} ${response.statusText}`);
     }
 
-    const responseData = await emailResponse.json();
-    console.log('Email sent successfully:', responseData);
-    return responseData;
+    const result = await response.json();
+    console.log('Email sent successfully:', result);
+    return result;
   } catch (error) {
     console.error('Error in sendEmail function:', error);
     throw error;
@@ -97,7 +102,7 @@ async function sendEmail(payload: EmailPayload) {
 serve(async (req) => {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   };
 
@@ -107,27 +112,34 @@ serve(async (req) => {
 
   try {
     const payload = await req.json() as EmailPayload;
-    console.log('Received request with payload:', payload);
+    console.log('Received request payload:', payload);
 
     const result = await sendEmail(payload);
 
-    return new Response(JSON.stringify({ success: true, data: result }), {
-      headers: {
-        'Content-Type': 'application/json',
-        ...corsHeaders,
-      },
-    });
-  } catch (error) {
-    console.error('Error in request handler:', error);
     return new Response(
-      JSON.stringify({ 
-        error: error instanceof Error ? error.message : 'An unexpected error occurred'
-      }), {
-      status: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        ...corsHeaders,
-      },
-    });
+      JSON.stringify({ success: true, data: result }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          ...corsHeaders,
+        },
+      }
+    );
+  } catch (error) {
+    console.error('Error processing request:', error);
+    
+    return new Response(
+      JSON.stringify({
+        success: false,
+        error: error instanceof Error ? error.message : 'An unexpected error occurred',
+      }),
+      {
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json',
+          ...corsHeaders,
+        },
+      }
+    );
   }
 });
