@@ -1,5 +1,5 @@
 
-import { serve } from 'https://deno.fresh.runtime.dev';
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 interface EmailPayload {
   name: string;
@@ -88,7 +88,7 @@ serve(async (req) => {
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   };
 
   if (req.method === 'OPTIONS') {
