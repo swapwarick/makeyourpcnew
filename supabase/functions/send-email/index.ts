@@ -7,14 +7,22 @@ interface EmailPayload {
   message: string;
 }
 
-async function getAccessToken() {
+interface SendPulseTokenResponse {
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+}
+
+async function getAccessToken(): Promise<string> {
   try {
     const SENDPULSE_USER_ID = Deno.env.get('SENDPULSE_USER_ID');
     const SENDPULSE_SECRET = Deno.env.get('SENDPULSE_SECRET');
 
     if (!SENDPULSE_USER_ID || !SENDPULSE_SECRET) {
-      throw new Error('SendPulse credentials are not configured. Please check your environment variables.');
+      throw new Error('SendPulse credentials are not configured');
     }
+
+    console.log('Requesting SendPulse access token...');
 
     const response = await fetch('https://api.sendpulse.com/oauth/access_token', {
       method: 'POST',
@@ -34,27 +42,26 @@ async function getAccessToken() {
       throw new Error(`Failed to get SendPulse access token: ${response.status} ${response.statusText}`);
     }
 
-    const data = await response.json();
+    const data = await response.json() as SendPulseTokenResponse;
+    
     if (!data.access_token) {
       console.error('Invalid SendPulse response:', data);
-      throw new Error('SendPulse did not provide an access token');
+      throw new Error('SendPulse response did not include access token');
     }
 
+    console.log('Successfully obtained SendPulse access token');
     return data.access_token;
   } catch (error) {
     console.error('Error getting SendPulse access token:', error);
-    throw new Error('Failed to authenticate with SendPulse');
+    throw error;
   }
 }
 
 async function sendEmail(payload: EmailPayload) {
   try {
-    console.log('Starting email send process...');
-    
     const accessToken = await getAccessToken();
-    console.log('Successfully obtained SendPulse access token');
 
-    const response = await fetch('https://api.sendpulse.com/smtp/emails', {
+    const emailResponse = await fetch('https://api.sendpulse.com/smtp/emails', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,13 +91,13 @@ async function sendEmail(payload: EmailPayload) {
       }),
     });
 
-    if (!response.ok) {
-      const errorText = await response.text();
+    if (!emailResponse.ok) {
+      const errorText = await emailResponse.text();
       console.error('SendPulse email send failed:', errorText);
-      throw new Error(`Failed to send email: ${response.status} ${response.statusText}`);
+      throw new Error(`Failed to send email: ${emailResponse.status} ${emailResponse.statusText}`);
     }
 
-    const result = await response.json();
+    const result = await emailResponse.json();
     console.log('Email sent successfully:', result);
     return result;
   } catch (error) {
