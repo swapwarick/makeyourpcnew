@@ -25,15 +25,25 @@ serve(async (req) => {
     const payload = await req.json() as EmailPayload;
     console.log('Received request payload:', payload);
 
+    if (!payload.name || !payload.email || !payload.message) {
+      throw new Error('Missing required fields');
+    }
+
     const emailResponse = await resend.emails.send({
-      from: "Make Your PC Fast <onboarding@resend.dev>",
+      from: "MakeYourPCFast Support <onboarding@resend.dev>",
       to: ["makeyourpcnew@gmail.com"],
-      subject: "New Contact Form Submission",
+      reply_to: payload.email,
+      subject: `New Contact Form Submission from ${payload.name}`,
       html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${payload.name}</p>
-        <p><strong>Email:</strong> ${payload.email}</p>
-        <p><strong>Message:</strong> ${payload.message}</p>
+        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #2563eb; margin-bottom: 20px;">New Contact Form Submission</h2>
+          <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px;">
+            <p style="margin-bottom: 15px;"><strong>Name:</strong> ${payload.name}</p>
+            <p style="margin-bottom: 15px;"><strong>Email:</strong> ${payload.email}</p>
+            <p style="margin-bottom: 15px;"><strong>Message:</strong></p>
+            <p style="background-color: white; padding: 15px; border-radius: 4px;">${payload.message}</p>
+          </div>
+        </div>
       `,
     });
 
