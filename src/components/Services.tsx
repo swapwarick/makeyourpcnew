@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Cpu, HardDrive, Zap, Shield } from "lucide-react";
+import { Cpu, HardDrive, Zap, Shield, Network } from "lucide-react";
 
 const services = [
   {
@@ -11,6 +11,11 @@ const services = [
     icon: <Zap className="w-8 h-8" />,
     title: "Performance Tuning",
     description: "Optimize your system settings for peak efficiency and speed.",
+  },
+  {
+    icon: <Network className="w-8 h-8" />,
+    title: "Professional Network Solutions",
+    description: "Expert network setup and configuration for homes and businesses.",
   },
   {
     icon: <HardDrive className="w-8 h-8" />,

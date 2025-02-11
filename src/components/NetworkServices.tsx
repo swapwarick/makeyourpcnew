@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Network, Wifi, Router } from "lucide-react";
 import Parallax from "./Parallax";
@@ -24,7 +23,8 @@ const networkServices = [
       "Structured cabling and network infrastructure",
       "Secure wireless network deployment",
       "VPN and remote access setup",
-      "Network monitoring and maintenance"
+      "Network monitoring and maintenance",
+      "Scalable network architecture design"
     ],
     image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334"
   }

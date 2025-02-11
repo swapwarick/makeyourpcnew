@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { User } from "lucide-react";
 
@@ -11,6 +12,16 @@ const testimonials = [
     name: "Adarsh Hegde",
     role: "Graphic Designer",
     content: "The performance boost after the upgrades is remarkable. Worth every penny!",
+  },
+  {
+    name: "Sheena Dambelkar",
+    role: "Business Owner",
+    content: "Their network setup transformed our home office connectivity. Excellent service!",
+  },
+  {
+    name: "Ajit Singh",
+    role: "Corporate Manager",
+    content: "Professional network installation for our entire office. Seamless execution and great support.",
   },
   {
     name: "Mamta Tiwari",
