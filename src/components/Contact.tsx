@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { supabase } from "@/integrations/supabase/client";  // Import the supabase client directly
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +11,6 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const supabase = useSupabaseClient();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,7 +125,6 @@ const Contact = () => {
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </motion.button>
               </form>
-             
             </div>
           </div>
         </motion.div>
