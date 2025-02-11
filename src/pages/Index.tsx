@@ -1,3 +1,4 @@
+
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Performance from "@/components/Performance";
@@ -5,6 +6,7 @@ import Features from "@/components/Features";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import HardwareUpgrades from "@/components/HardwareUpgrades";
+import NetworkServices from "@/components/NetworkServices";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -37,6 +39,7 @@ const Index = () => {
       <Hero />
       <Features />
       <HardwareUpgrades />
+      <NetworkServices />
       <Services />
       <Performance />
       <Testimonials />

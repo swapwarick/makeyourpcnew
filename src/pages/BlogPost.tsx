@@ -1,4 +1,3 @@
-
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
@@ -110,6 +109,74 @@ const blogContent = {
         <li>Latest driver updates</li>
         <li>BIOS/UEFI optimization</li>
         <li>Performance monitoring and testing</li>
+      </ul>
+    `
+  },
+  "home-network-setup-guide": {
+    title: "Complete Guide to Setting Up Your Home Network",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    content: `
+      <h2>Creating the Perfect Home Network</h2>
+      <p>A well-designed home network is essential in today's connected world. Whether you're working from home, streaming entertainment, or managing smart home devices, a reliable network is crucial.</p>
+      
+      <h3>Key Components of a Home Network</h3>
+      <ul>
+        <li>High-performance router for reliable connectivity</li>
+        <li>Strategic WiFi access points for complete coverage</li>
+        <li>Wired connections for gaming and home office</li>
+        <li>Network security features and firewall protection</li>
+      </ul>
+
+      <h3>Optimizing Your Network</h3>
+      <p>To ensure the best performance:</p>
+      <ul>
+        <li>Place your router in a central location</li>
+        <li>Use mesh WiFi systems for larger homes</li>
+        <li>Set up separate networks for guests and IoT devices</li>
+        <li>Implement proper security measures</li>
+      </ul>
+
+      <h3>Professional Installation Benefits</h3>
+      <p>While DIY is possible, professional installation ensures:</p>
+      <ul>
+        <li>Optimal equipment placement and configuration</li>
+        <li>Proper cable management and installation</li>
+        <li>Advanced security setup</li>
+        <li>Future-proof network design</li>
+      </ul>
+    `
+  },
+  "office-network-essentials": {
+    title: "Essential Components of a Modern Office Network",
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+    content: `
+      <h2>Building a Robust Business Network</h2>
+      <p>A reliable office network is the backbone of modern business operations. It needs to be fast, secure, and capable of supporting multiple users and devices simultaneously.</p>
+
+      <h3>Core Infrastructure Components</h3>
+      <ul>
+        <li>Enterprise-grade routers and switches</li>
+        <li>Structured cabling system</li>
+        <li>Professional-grade wireless access points</li>
+        <li>Network security appliances</li>
+      </ul>
+
+      <h3>Security Considerations</h3>
+      <p>Business networks require enhanced security measures:</p>
+      <ul>
+        <li>Advanced firewall protection</li>
+        <li>VPN setup for remote access</li>
+        <li>Network segmentation</li>
+        <li>Regular security audits</li>
+      </ul>
+
+      <h3>Scalability and Management</h3>
+      <p>Future-proof your business network with:</p>
+      <ul>
+        <li>Expandable infrastructure</li>
+        <li>Cloud management capabilities</li>
+        <li>Monitoring and maintenance tools</li>
+        <li>Professional IT support</li>
       </ul>
     `
   }

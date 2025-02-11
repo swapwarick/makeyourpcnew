@@ -1,8 +1,21 @@
-
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const blogPosts = [
+  {
+    id: "home-network-setup-guide",
+    title: "Complete Guide to Setting Up Your Home Network",
+    excerpt: "Learn how to create a reliable and secure home network that covers every corner of your house.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085",
+    readTime: "7 min read",
+  },
+  {
+    id: "office-network-essentials",
+    title: "Essential Components of a Modern Office Network",
+    excerpt: "Discover what makes a business network reliable, secure, and scalable for modern workplace needs.",
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334",
+    readTime: "8 min read",
+  },
   {
     id: "ssd-ram-upgrade",
     title: "Boost Your PC Performance with SSD and RAM Upgrades",
