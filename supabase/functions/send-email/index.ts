@@ -44,7 +44,7 @@ serve(async (req) => {
     // Attempt to send email
     console.log('Attempting to send email via Resend...');
     const emailResponse = await resend.emails.send({
-      from: "MakeYourPCFast Support <onboarding@resend.dev>",
+      from: "contact@makeyourpcnew.in", // Update this with your verified domain
       to: ["makeyourpcnew@gmail.com"],
       reply_to: payload.email,
       subject: `New Contact Form Submission from ${payload.name}`,
