@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { toast } from "@/components/ui/use-toast";
-import { supabase } from "@/integrations/supabase/client";  // Import the supabase client directly
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -17,11 +17,14 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      console.log('Sending form data:', formData);
+      
       const { data, error } = await supabase.functions.invoke('send-email', {
         body: formData,
       });
 
       if (error) {
+        console.error('Supabase function error:', error);
         throw new Error(error.message);
       }
 
@@ -31,6 +34,7 @@ const Contact = () => {
         title: "Message Sent",
         description: "We'll get back to you as soon as possible!",
       });
+      
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error('Error sending message:', error);

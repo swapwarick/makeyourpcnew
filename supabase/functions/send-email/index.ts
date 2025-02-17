@@ -17,18 +17,32 @@ const corsHeaders = {
 };
 
 serve(async (req) => {
+  // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
     return new Response('ok', { headers: corsHeaders });
   }
 
   try {
+    console.log('Starting email function...');
+    
+    // Parse and validate the request payload
     const payload = await req.json() as EmailPayload;
     console.log('Received request payload:', payload);
 
     if (!payload.name || !payload.email || !payload.message) {
-      throw new Error('Missing required fields');
+      console.error('Validation error: Missing required fields');
+      throw new Error('Missing required fields: name, email, and message are required');
     }
 
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(payload.email)) {
+      console.error('Validation error: Invalid email format');
+      throw new Error('Invalid email format');
+    }
+
+    // Attempt to send email
+    console.log('Attempting to send email via Resend...');
     const emailResponse = await resend.emails.send({
       from: "MakeYourPCFast Support <onboarding@resend.dev>",
       to: ["makeyourpcnew@gmail.com"],
