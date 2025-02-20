@@ -10,16 +10,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient();
-import { Analytics } from '@vercel/analytics/react';
- 
-export default function App() {
-  return (
-    <div>
-      {/* ... */}
-      <Analytics />
-    </div>
-  );
-}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
