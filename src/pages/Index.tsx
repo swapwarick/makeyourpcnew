@@ -7,6 +7,7 @@ import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import HardwareUpgrades from "@/components/HardwareUpgrades";
 import NetworkServices from "@/components/NetworkServices";
+import ChatBox from "@/components/ChatBox";
 import { useEffect } from "react";
 
 const Index = () => {
@@ -45,6 +46,7 @@ const Index = () => {
         <Performance />
         <Testimonials />
         <Contact />
+        <ChatBox />
       </div>
     </main>
   );
