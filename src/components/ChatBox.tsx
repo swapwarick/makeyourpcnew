@@ -1,7 +1,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useToast } from "@/components/ui/use-toast";
-import { MessagesSquare, X, Send } from 'lucide-react';
+import { MessagesSquare, X, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 
@@ -36,11 +36,20 @@ const ChatBox = () => {
     setIsLoading(true);
 
     try {
+      console.log("Sending message to chat-with-avi function:", userMessage);
       const { data, error } = await supabase.functions.invoke('chat-with-avi', {
         body: { message: userMessage }
       });
 
-      if (error) throw error;
+      console.log("Response from chat-with-avi:", { data, error });
+      
+      if (error) {
+        throw new Error(`Function error: ${error.message}`);
+      }
+
+      if (!data || !data.reply) {
+        throw new Error('No reply received from Avi');
+      }
 
       setMessages(prev => [...prev, { type: 'bot', content: data.reply }]);
     } catch (error) {
@@ -48,8 +57,10 @@ const ChatBox = () => {
       toast({
         variant: "destructive",
         title: "Error",
-        description: "Failed to get response from Avi. Please try again.",
+        description: `Failed to get response from Avi: ${error instanceof Error ? error.message : 'Unknown error'}`,
       });
+      // Add an error message in the chat
+      setMessages(prev => [...prev, { type: 'bot', content: "Sorry, I'm having trouble connecting right now. Please try again later." }]);
     } finally {
       setIsLoading(false);
     }
@@ -76,6 +87,12 @@ const ChatBox = () => {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        {messages.length === 0 && (
+          <div className="text-center text-gray-500 mt-8">
+            <p>Hi! I'm Avi, your PC hardware and networking specialist.</p>
+            <p className="mt-2">How can I help you today?</p>
+          </div>
+        )}
         {messages.map((msg, i) => (
           <div
             key={i}
@@ -105,7 +122,11 @@ const ChatBox = () => {
           disabled={isLoading}
         />
         <Button type="submit" disabled={isLoading} size="icon">
-          <Send className="w-4 h-4" />
+          {isLoading ? (
+            <Loader2 className="w-4 h-4 animate-spin" />
+          ) : (
+            <Send className="w-4 h-4" />
+          )}
         </Button>
       </form>
     </div>

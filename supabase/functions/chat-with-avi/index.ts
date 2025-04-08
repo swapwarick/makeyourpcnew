@@ -20,6 +20,8 @@ serve(async (req) => {
       throw new Error('Groq API key not configured');
     }
 
+    console.log("Received message:", message);
+    
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -47,14 +49,21 @@ serve(async (req) => {
           }
         ],
         temperature: 0.7,
-        max_tokens: 1024,
+        max_tokens: 800,
       }),
     });
 
     const data = await response.json();
-    return new Response(JSON.stringify({ reply: data.choices[0].message.content }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    console.log("Response received:", data);
+    
+    if (data.choices && data.choices[0] && data.choices[0].message) {
+      return new Response(JSON.stringify({ reply: data.choices[0].message.content }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    } else {
+      console.error("Unexpected response structure:", data);
+      throw new Error('Unexpected response structure from Groq API');
+    }
   } catch (error) {
     console.error('Groq API Error:', error);
     return new Response(JSON.stringify({ error: error.message }), {
