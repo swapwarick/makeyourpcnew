@@ -1,3 +1,4 @@
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -13,10 +14,15 @@ const Parallax = ({ children, offset = 50 }: ParallaxProps) => {
     offset: ["start end", "end start"],
   });
 
+  // Optimize transform by using a smaller range and enabling hardware acceleration
   const y = useTransform(scrollYProgress, [0, 1], [-offset, offset]);
 
   return (
-    <motion.div ref={ref} style={{ y }}>
+    <motion.div 
+      ref={ref} 
+      style={{ y }} 
+      className="will-change-transform"
+    >
       {children}
     </motion.div>
   );
