@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Cpu, HardDrive, Zap, Shield, Network } from "lucide-react";
 
@@ -31,18 +32,18 @@ const services = [
 
 const Services = () => {
   return (
-    <section className="py-20 px-4 bg-muted" id="services">
+    <section className="py-20 px-4 bg-muted dark:bg-secondary" id="services">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-bold text-secondary mb-4"
+            className="text-3xl md:text-4xl font-bold text-secondary dark:text-white mb-4"
           >
             Our Services
           </motion.h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Comprehensive PC optimization services to enhance your computer's performance
           </p>
         </div>
@@ -54,11 +55,11 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <div className="text-primary mb-4">{service.icon}</div>
-              <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
-              <p className="text-gray-600">{service.description}</p>
+              <h3 className="text-xl font-semibold mb-2 dark:text-white">{service.title}</h3>
+              <p className="text-gray-600 dark:text-gray-300">{service.description}</p>
             </motion.div>
           ))}
         </div>

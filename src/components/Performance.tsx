@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 
 const performanceMetrics = [
@@ -9,7 +10,7 @@ const performanceMetrics = [
 
 const Performance = () => {
   return (
-    <section className="py-20 px-4 bg-secondary text-white">
+    <section className="py-20 px-4 bg-secondary text-white dark:bg-gray-800">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0 }}

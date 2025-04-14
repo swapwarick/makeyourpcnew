@@ -32,13 +32,13 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="py-20 px-4 bg-white" id="testimonials">
+    <section className="py-20 px-4 bg-white dark:bg-gray-900" id="testimonials">
       <div className="container mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-12"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 dark:text-white"
         >
           What Our Clients Say
         </motion.h2>
@@ -50,18 +50,18 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
-              className="bg-muted p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+              className="bg-muted dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               <div className="flex items-center mb-4">
                 <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
                   <User className="w-6 h-6" />
                 </div>
                 <div className="ml-4">
-                  <h3 className="font-semibold">{testimonial.name}</h3>
-                  <p className="text-sm text-gray-600">{testimonial.role}</p>
+                  <h3 className="font-semibold dark:text-white">{testimonial.name}</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{testimonial.role}</p>
                 </div>
               </div>
-              <p className="text-gray-700">{testimonial.content}</p>
+              <p className="text-gray-700 dark:text-gray-200">{testimonial.content}</p>
             </motion.div>
           ))}
         </div>

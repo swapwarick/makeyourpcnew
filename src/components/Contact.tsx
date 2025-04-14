@@ -109,12 +109,12 @@ const Contact = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">Name</FormLabel>
+                        <FormLabel className="text-sm font-medium dark:text-white">Name</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Your name" 
                             {...field} 
-                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white dark:border-gray-700"
                           />
                         </FormControl>
                         <FormMessage />
@@ -126,13 +126,13 @@ const Contact = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">Email</FormLabel>
+                        <FormLabel className="text-sm font-medium dark:text-white">Email</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="your.email@example.com" 
                             type="email" 
                             {...field} 
-                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white dark:border-gray-700"
                           />
                         </FormControl>
                         <FormMessage />
@@ -144,13 +144,13 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium">Message</FormLabel>
+                        <FormLabel className="text-sm font-medium dark:text-white">Message</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="How can we help you?" 
                             {...field} 
                             rows={4}
-                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent dark:bg-gray-800 dark:text-white dark:border-gray-700"
                           />
                         </FormControl>
                         <FormMessage />
