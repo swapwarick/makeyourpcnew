@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Network, Wifi, Router } from "lucide-react";
 import Parallax from "./Parallax";
@@ -32,7 +33,7 @@ const networkServices = [
 
 const NetworkServices = () => {
   return (
-    <section className="py-20 px-4 bg-white" id="network-services">
+    <section className="py-20 px-4 bg-white dark:bg-gray-900" id="network-services">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -40,10 +41,10 @@ const NetworkServices = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
             Professional Network Solutions
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Expert network installation and configuration services for homes and businesses
           </p>
         </motion.div>
@@ -56,7 +57,7 @@ const NetworkServices = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden"
               >
                 <div className="h-48 overflow-hidden">
                   <img
@@ -68,12 +69,12 @@ const NetworkServices = () => {
                 <div className="p-6">
                   <div className="flex items-center mb-4">
                     <div className="text-primary mr-4">{service.icon}</div>
-                    <h3 className="text-2xl font-semibold">{service.title}</h3>
+                    <h3 className="text-2xl font-semibold dark:text-white">{service.title}</h3>
                   </div>
-                  <p className="text-gray-600 mb-4">{service.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{service.description}</p>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-gray-600">
+                      <li key={idx} className="flex items-center text-gray-600 dark:text-gray-300">
                         <Wifi className="w-4 h-4 mr-2 text-primary" />
                         {feature}
                       </li>

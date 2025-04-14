@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Cpu, HardDrive, Fan } from "lucide-react";
 import Parallax from "./Parallax";
@@ -31,7 +32,7 @@ const upgrades = [
 
 const HardwareUpgrades = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-white to-muted" id="hardware">
+    <section className="py-20 px-4 bg-gradient-to-b from-white to-muted dark:from-gray-900 dark:to-secondary" id="hardware">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,10 +40,10 @@ const HardwareUpgrades = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
             Hardware Upgrades
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Transform your old PC with our professional hardware upgrade services
           </p>
         </motion.div>
@@ -55,14 +56,14 @@ const HardwareUpgrades = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="text-primary mb-4">{upgrade.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{upgrade.title}</h3>
-                <p className="text-gray-600 mb-4">{upgrade.description}</p>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">{upgrade.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-4">{upgrade.description}</p>
                 <ul className="space-y-2">
                   {upgrade.benefits.map((benefit, idx) => (
-                    <li key={idx} className="flex items-center text-sm text-gray-600">
+                    <li key={idx} className="flex items-center text-sm text-gray-600 dark:text-gray-300">
                       <span className="w-1.5 h-1.5 bg-primary rounded-full mr-2" />
                       {benefit}
                     </li>

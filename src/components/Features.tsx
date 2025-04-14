@@ -1,16 +1,17 @@
+
 import { motion } from "framer-motion";
 import Parallax from "./Parallax";
 import { Zap, Clock, Wrench, Shield } from "lucide-react";
 
 const Features = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-white to-muted overflow-hidden">
+    <section className="py-20 px-4 bg-gradient-to-b from-white to-muted dark:from-gray-900 dark:to-secondary overflow-hidden">
       <div className="container mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-center mb-16"
+          className="text-3xl md:text-4xl font-bold text-center mb-16 dark:text-white"
         >
           Why Choose Us
         </motion.h2>
@@ -36,8 +37,8 @@ const Features = () => {
                 <Zap className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Lightning Fast Results</h3>
-                <p className="text-gray-600">Experience immediate performance improvements after our optimization service.</p>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Lightning Fast Results</h3>
+                <p className="text-gray-600 dark:text-gray-300">Experience immediate performance improvements after our optimization service.</p>
               </div>
             </motion.div>
             <motion.div
@@ -51,8 +52,8 @@ const Features = () => {
                 <Clock className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Quick Turnaround</h3>
-                <p className="text-gray-600">Most services completed within 24-48 hours.</p>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Quick Turnaround</h3>
+                <p className="text-gray-600 dark:text-gray-300">Most services completed within 24-48 hours.</p>
               </div>
             </motion.div>
             <motion.div
@@ -66,8 +67,8 @@ const Features = () => {
                 <Wrench className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Expert Technicians</h3>
-                <p className="text-gray-600">Skilled professionals with years of experience in PC optimization.</p>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Expert Technicians</h3>
+                <p className="text-gray-600 dark:text-gray-300">Skilled professionals with years of experience in PC optimization.</p>
               </div>
             </motion.div>
             <motion.div
@@ -81,8 +82,8 @@ const Features = () => {
                 <Shield className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Guaranteed Results</h3>
-                <p className="text-gray-600">100% satisfaction guarantee or your money back.</p>
+                <h3 className="text-xl font-semibold mb-2 dark:text-white">Guaranteed Results</h3>
+                <p className="text-gray-600 dark:text-gray-300">100% satisfaction guarantee or your money back.</p>
               </div>
             </motion.div>
           </div>
