@@ -81,7 +81,7 @@ const Contact = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-xl overflow-hidden"
+          className="bg-card rounded-2xl shadow-xl overflow-hidden dark:border dark:border-border"
         >
           <div className="grid md:grid-cols-2">
             <div className="bg-primary p-12 text-white">
@@ -101,7 +101,7 @@ const Contact = () => {
                 </p>
               </div>
             </div>
-            <div className="p-12">
+            <div className="p-12 bg-card text-card-foreground">
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -109,12 +109,12 @@ const Contact = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">Name</FormLabel>
+                        <FormLabel className="text-sm font-medium">Name</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="Your name" 
                             {...field} 
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                           />
                         </FormControl>
                         <FormMessage />
@@ -126,13 +126,13 @@ const Contact = () => {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">Email</FormLabel>
+                        <FormLabel className="text-sm font-medium">Email</FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="your.email@example.com" 
                             type="email" 
                             {...field} 
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                           />
                         </FormControl>
                         <FormMessage />
@@ -144,13 +144,13 @@ const Contact = () => {
                     name="message"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-sm font-medium text-gray-700">Message</FormLabel>
+                        <FormLabel className="text-sm font-medium">Message</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="How can we help you?" 
                             {...field} 
                             rows={4}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                            className="w-full px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                           />
                         </FormControl>
                         <FormMessage />
