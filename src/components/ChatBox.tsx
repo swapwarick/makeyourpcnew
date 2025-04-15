@@ -104,7 +104,9 @@ const ChatBox = () => {
               className={`max-w-[80%] rounded-lg p-3 ${
                 msg.type === 'user'
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-muted text-foreground'
+                  : msg.type === 'bot' 
+                    ? 'bg-secondary/20 text-foreground border border-border/30 dark:text-white dark:border-white/10' 
+                    : 'bg-muted text-foreground'
               }`}
             >
               {msg.content}
