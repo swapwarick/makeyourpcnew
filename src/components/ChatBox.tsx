@@ -4,6 +4,8 @@ import { useToast } from "@/components/ui/use-toast";
 import { MessagesSquare, X, Send, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 interface Message {
   type: 'user' | 'bot';
@@ -78,7 +80,7 @@ const ChatBox = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-[350px] h-[500px] bg-white rounded-lg shadow-xl flex flex-col">
+    <div className="fixed bottom-4 right-4 w-[350px] h-[500px] bg-background rounded-lg shadow-xl flex flex-col border border-border">
       <div className="p-4 bg-primary text-white rounded-t-lg flex justify-between items-center">
         <h3 className="font-semibold">Chat with Avi</h3>
         <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="text-white hover:text-white/90">
@@ -86,9 +88,9 @@ const ChatBox = () => {
         </Button>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background">
         {messages.length === 0 && (
-          <div className="text-center text-gray-500 mt-8">
+          <div className="text-center text-muted-foreground mt-8">
             <p>Hi! I'm Avi, your PC hardware and networking specialist.</p>
             <p className="mt-2">How can I help you today?</p>
           </div>
@@ -101,8 +103,8 @@ const ChatBox = () => {
             <div
               className={`max-w-[80%] rounded-lg p-3 ${
                 msg.type === 'user'
-                  ? 'bg-primary text-white'
-                  : 'bg-gray-100 text-gray-800'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-foreground'
               }`}
             >
               {msg.content}
@@ -112,13 +114,13 @@ const ChatBox = () => {
         <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={handleSubmit} className="p-4 border-t flex gap-2">
-        <input
+      <form onSubmit={handleSubmit} className="p-4 border-t border-border flex gap-2 bg-background">
+        <Input
           type="text"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Type your message..."
-          className="flex-1 rounded-md border p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+          className="flex-1 bg-background text-foreground border-input"
           disabled={isLoading}
         />
         <Button type="submit" disabled={isLoading} size="icon">
