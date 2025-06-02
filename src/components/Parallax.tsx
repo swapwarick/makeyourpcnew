@@ -7,15 +7,15 @@ interface ParallaxProps {
   offset?: number;
 }
 
-const Parallax = ({ children, offset = 50 }: ParallaxProps) => {
+const Parallax = ({ children, offset = 30 }: ParallaxProps) => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  // Optimize transform by using a smaller range and enabling hardware acceleration
-  const y = useTransform(scrollYProgress, [0, 1], [-offset, offset]);
+  // Reduced offset for better performance
+  const y = useTransform(scrollYProgress, [0, 1], [-offset/2, offset/2]);
 
   return (
     <motion.div 

@@ -11,34 +11,45 @@ import ChatBox from "@/components/ChatBox";
 import { useEffect, useCallback } from "react";
 
 const Index = () => {
-  // Debounced smooth scroll implementation
+  // Enhanced smooth scroll implementation
   const smoothScroll = useCallback((e: Event) => {
     e.preventDefault();
     const target = e.target as HTMLAnchorElement;
     const id = target.getAttribute("href");
     if (!id) return;
     
-    // This reduces the work the browser needs to do during the scroll
-    requestAnimationFrame(() => {
-      const element = document.querySelector(id);
-      element?.scrollIntoView({
+    const element = document.querySelector(id);
+    if (element) {
+      element.scrollIntoView({
         behavior: "smooth",
         block: "start",
       });
-    });
+    }
   }, []);
 
   useEffect(() => {
-    // Use passive listeners for non-anchor clicks to improve performance
-    document.addEventListener("scroll", () => {}, { passive: true });
+    // Enhanced scroll listeners with performance optimizations
+    let ticking = false;
     
-    // Add smooth scroll only for anchor links
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    document.addEventListener("scroll", handleScroll, { passive: true });
+    
+    // Add smooth scroll for anchor links
     const anchors = document.querySelectorAll('a[href^="#"]');
     anchors.forEach((anchor) => {
       anchor.addEventListener("click", smoothScroll, { passive: false });
     });
 
     return () => {
+      document.removeEventListener("scroll", handleScroll);
       anchors.forEach((anchor) => {
         anchor.removeEventListener("click", smoothScroll);
       });

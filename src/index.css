@@ -90,6 +90,10 @@
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
     position: relative;
@@ -97,46 +101,68 @@
     overflow-x: hidden;
   }
 
+  /* Optimized background with reduced complexity */
   body::before {
     content: '';
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at center, 
-      var(--gradient-start) 0%,
-      var(--gradient-mid1) 25%,
-      var(--gradient-mid2) 50%,
-      var(--gradient-end) 100%
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+      hsl(var(--gradient-start)) 0%,
+      hsl(var(--gradient-mid)) 50%,
+      hsl(var(--gradient-end)) 100%
     );
     z-index: -1;
-    animation: gradientMove 15s ease-in-out infinite;
+    will-change: auto;
   }
   
   :root {
-    --gradient-start: #9b87f5;
-    --gradient-mid1: #7E69AB;
-    --gradient-mid2: #6E59A5;
-    --gradient-end: #1A1F2C;
+    --gradient-start: 259 89% 87%;
+    --gradient-mid: 258 44% 71%;
+    --gradient-end: 220 13% 18%;
   }
   
   .dark {
-    --gradient-start: #1a1a2e;
-    --gradient-mid1: #16213e;
-    --gradient-mid2: #0f3460;
-    --gradient-end: #0a043c;
+    --gradient-start: 220 13% 18%;
+    --gradient-mid: 216 22% 22%;
+    --gradient-end: 224 71% 4%;
+  }
+
+  /* Smooth scroll enhancements */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    * {
+      scroll-behavior: smooth;
+    }
   }
 }
 
-@keyframes gradientMove {
-  0% {
-    transform: translate(0, 0);
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-scroll {
+  will-change: scroll-position;
+}
+
+/* Optimized animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  50% {
-    transform: translate(-5%, -5%);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  100% {
-    transform: translate(0, 0);
-  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
 }
