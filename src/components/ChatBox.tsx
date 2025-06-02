@@ -1,11 +1,10 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { useToast } from "@/components/ui/use-toast";
-import { MessagesSquare, X, Send, Loader2 } from 'lucide-react';
+import { MessagesSquare, X, Send, Loader2, Minimize } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { supabase } from '@/integrations/supabase/client';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
 
 interface Message {
   type: 'user' | 'bot';
@@ -13,7 +12,8 @@ interface Message {
 }
 
 const ChatBox = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true); // Start open by default
+  const [isMinimized, setIsMinimized] = useState(false);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -68,6 +68,33 @@ const ChatBox = () => {
     }
   };
 
+  const handleMinimize = () => {
+    setIsMinimized(true);
+  };
+
+  const handleRestore = () => {
+    setIsMinimized(false);
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setIsMinimized(false);
+  };
+
+  // Show minimized button if chat is minimized
+  if (isMinimized) {
+    return (
+      <Button
+        onClick={handleRestore}
+        className="fixed bottom-4 right-4 rounded-full p-4 bg-primary text-white shadow-lg hover:bg-primary/90"
+      >
+        <MessagesSquare className="w-6 h-6" />
+      </Button>
+    );
+  }
+
+  // Show chat button if not open
   if (!isOpen) {
     return (
       <Button
@@ -80,12 +107,17 @@ const ChatBox = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-[350px] h-[500px] bg-background rounded-lg shadow-xl flex flex-col border border-border">
+    <div className="fixed bottom-4 right-4 w-[350px] h-[500px] bg-background rounded-lg shadow-xl flex flex-col border border-border animate-fade-in-up">
       <div className="p-4 bg-primary text-white rounded-t-lg flex justify-between items-center">
         <h3 className="font-semibold">Chat with Avi</h3>
-        <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} className="text-white hover:text-white/90">
-          <X className="w-5 h-5" />
-        </Button>
+        <div className="flex gap-1">
+          <Button variant="ghost" size="icon" onClick={handleMinimize} className="text-white hover:text-white/90 h-8 w-8">
+            <Minimize className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="icon" onClick={handleClose} className="text-white hover:text-white/90 h-8 w-8">
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background">
