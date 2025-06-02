@@ -87,7 +87,7 @@ const ChatBox = () => {
     return (
       <Button
         onClick={handleRestore}
-        className="fixed bottom-4 right-4 rounded-full p-4 bg-primary text-white shadow-lg hover:bg-primary/90"
+        className="fixed bottom-4 right-4 rounded-full p-4 bg-primary text-white shadow-lg hover:bg-primary/90 z-50"
       >
         <MessagesSquare className="w-6 h-6" />
       </Button>
@@ -99,7 +99,7 @@ const ChatBox = () => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 rounded-full p-4 bg-primary text-white shadow-lg hover:bg-primary/90"
+        className="fixed bottom-4 right-4 rounded-full p-4 bg-primary text-white shadow-lg hover:bg-primary/90 z-50"
       >
         <MessagesSquare className="w-6 h-6" />
       </Button>
@@ -107,9 +107,9 @@ const ChatBox = () => {
   }
 
   return (
-    <div className="fixed bottom-4 right-4 w-[350px] h-[500px] bg-background rounded-lg shadow-xl flex flex-col border border-border animate-fade-in-up">
+    <div className="fixed top-4 right-4 w-[350px] h-[500px] bg-background rounded-lg shadow-xl flex flex-col border border-border animate-fade-in-up z-50">
       <div className="p-4 bg-primary text-white rounded-t-lg flex justify-between items-center">
-        <h3 className="font-semibold">Chat with Avi</h3>
+        <h3 className="font-semibold">How can I help you?</h3>
         <div className="flex gap-1">
           <Button variant="ghost" size="icon" onClick={handleMinimize} className="text-white hover:text-white/90 h-8 w-8">
             <Minimize className="w-4 h-4" />
